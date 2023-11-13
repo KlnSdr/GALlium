@@ -1,3 +1,7 @@
+package gallium;
+
+import gallium.logic.Dnf;
+
 public class Gal {
     private Pin[] pins = new Pin[20];
 
@@ -14,7 +18,7 @@ public class Gal {
 
     public boolean getPin(int pin) {
         if (pin < 1 || pin > 20) {
-            throw new IllegalArgumentException("Pin must be between 1 and 20");
+            throw new IllegalArgumentException("gallium.Pin must be between 1 and 20");
         }
 
         return pins[pin - 1].getValue();
@@ -22,7 +26,7 @@ public class Gal {
 
     public void setPin(int pin, boolean value) {
         if (pin < 1 || pin > 20) {
-            throw new IllegalArgumentException("Pin must be between 1 and 20");
+            throw new IllegalArgumentException("gallium.Pin must be between 1 and 20");
         }
 
         pins[pin - 1].setValue(value);
@@ -35,18 +39,18 @@ public class Gal {
             }
         }
 
-        throw new IllegalArgumentException("Pin with alias " + alias + " not found");
+        throw new IllegalArgumentException("gallium.Pin with alias " + alias + " not found");
     }
 
-    public void programPin(int pin, PinLogic logic) {
+    public void programPin(int pin, Dnf logic) {
         if (pin < 1 || pin > 20) {
-            throw new IllegalArgumentException("Pin must be between 1 and 20");
+            throw new IllegalArgumentException("gallium.Pin must be between 1 and 20");
         }
 
         pins[pin - 1].setLogic(logic);
     }
 
-    public void programPin(String alias, PinLogic logic) {
+    public void programPin(String alias, Dnf logic) {
         for (Pin pin : pins) {
             if (pin.getAlias() != null && pin.getAlias().equals(alias)) {
                 pin.setLogic(logic);
@@ -54,12 +58,12 @@ public class Gal {
             }
         }
 
-        throw new IllegalArgumentException("Pin with alias " + alias + " not found");
+        throw new IllegalArgumentException("gallium.Pin with alias " + alias + " not found");
     }
 
     public void setAlias(int pin, String alias) {
         if (pin < 1 || pin > 20) {
-            throw new IllegalArgumentException("Pin must be between 1 and 20");
+            throw new IllegalArgumentException("gallium.Pin must be between 1 and 20");
         }
         pins[pin - 1].setAlias(alias);
     }
@@ -72,7 +76,7 @@ public class Gal {
             }
         }
 
-        throw new IllegalArgumentException("Pin with alias " + alias + " not found");
+        throw new IllegalArgumentException("gallium.Pin with alias " + alias + " not found");
     }
 
     public void pulse() {

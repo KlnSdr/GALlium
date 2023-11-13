@@ -1,10 +1,14 @@
+package gallium;
+
+import gallium.logic.Dnf;
+
 import java.util.Objects;
 
 public class Pin {
     private String alias;
     private boolean value;
     private String specialValue;
-    private PinLogic logic;
+    private Dnf logic;
 
     public Pin(Pin other) {
         this.alias = other.alias;
@@ -41,11 +45,11 @@ public class Pin {
         this.specialValue = specialValue;
     }
 
-    public PinLogic getLogic() {
+    public Dnf getLogic() {
         return logic;
     }
 
-    public void setLogic(PinLogic logic) {
+    public void setLogic(Dnf logic) {
         this.logic = logic;
     }
 
