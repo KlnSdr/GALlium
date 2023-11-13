@@ -1,5 +1,7 @@
 public class Main {
     public static void main(String[] args) {
-        System.out.println("Hello world!");
+        final Gal gal = new Gal();
+
+        System.out.println(gal);
     }
 }
