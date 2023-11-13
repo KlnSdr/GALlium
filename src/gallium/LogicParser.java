@@ -17,6 +17,9 @@ public class LogicParser {
     }
 
     public static void parse(String line, Gal gal) {
+        if (line.trim().isEmpty()) {
+            return;
+        }
         if (line.lastIndexOf('=') != line.indexOf('=') || line.indexOf('=') == -1 || !line.endsWith(";")) {
             throw new IllegalArgumentException("Line must contain exactly one = and end with ;");
         }
