@@ -29,6 +29,14 @@ public class Main {
                 } else {
                     System.err.println("Missing value for filePath argument.");
                 }
+            } else if (arg.equals("--initial") || arg.equals("-i")) {
+                // Make sure there is another argument available
+                if (i + 1 < args.length) {
+                    setInitialState(args[i + 1], gal);
+                    i++; // Skip the next argument since it's the value
+                } else {
+                    System.err.println("Missing value for initial argument.");
+                }
             }
         }
 
@@ -52,5 +60,25 @@ public class Main {
             System.out.println("could not read file: " + path);
         }
         return output.toArray(new String[0]);
+    }
+
+    private static void setInitialState(String state, Gal gal) {
+        int initialValue;
+        if (state.startsWith("0b")) {
+            state = state.replaceAll("0b", "");
+            initialValue = Integer.parseInt(state, 2);
+        } else if (state.startsWith("0x")) {
+            state = state.replaceAll("0x", "");
+            initialValue = Integer.parseInt(state, 16);
+        } else {
+            initialValue = Integer.parseInt(state, 16);
+        }
+
+        initialValue &= 0xffff; // just for funsies
+
+        for (int i = 0; i < 20; i++) {
+            long bit = (initialValue >> i) & 1;
+            gal.setPin(i + 1, bit == 1);
+        }
     }
 }
