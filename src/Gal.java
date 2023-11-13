@@ -1,5 +1,5 @@
 public class Gal {
-    private final Pin[] pins = new Pin[20];
+    private Pin[] pins = new Pin[20];
 
     public Gal() {
         for (int i = 0; i < 20; i++) {
@@ -30,7 +30,7 @@ public class Gal {
 
     public boolean getPin(String alias) {
         for (Pin pin : pins) {
-            if (pin.getAlias().equals(alias)) {
+            if (pin.getAlias() != null && pin.getAlias().equals(alias)) {
                 return pin.getValue();
             }
         }
@@ -38,15 +38,57 @@ public class Gal {
         throw new IllegalArgumentException("Pin with alias " + alias + " not found");
     }
 
+    public void programPin(int pin, PinLogic logic) {
+        if (pin < 1 || pin > 20) {
+            throw new IllegalArgumentException("Pin must be between 1 and 20");
+        }
+
+        pins[pin - 1].setLogic(logic);
+    }
+
+    public void programPin(String alias, PinLogic logic) {
+        for (Pin pin : pins) {
+            if (pin.getAlias() != null && pin.getAlias().equals(alias)) {
+                pin.setLogic(logic);
+                return;
+            }
+        }
+
+        throw new IllegalArgumentException("Pin with alias " + alias + " not found");
+    }
+
+    public void setAlias(int pin, String alias) {
+        if (pin < 1 || pin > 20) {
+            throw new IllegalArgumentException("Pin must be between 1 and 20");
+        }
+        pins[pin - 1].setAlias(alias);
+    }
+
     public void setPin(String alias, boolean value) {
         for (Pin pin : pins) {
-            if (pin.getAlias().equals(alias)) {
+            if (pin.getAlias() != null && pin.getAlias().equals(alias)) {
                 pin.setValue(value);
                 return;
             }
         }
 
         throw new IllegalArgumentException("Pin with alias " + alias + " not found");
+    }
+
+    public void pulse() {
+        final Pin[] newState = new Pin[20];
+        for (int i = newState.length - 1; i >= 0; --i) {
+            Pin pin = pins[i];
+            if (pin != null) {
+                newState[i] = new Pin(pin);
+            }
+        }
+
+        for (int i = 0; i < 20; i++) {
+            newState[i].setValue(pins[i].evaluate(this));
+        }
+
+        pins = newState;
     }
 
     @Override
