@@ -5,7 +5,16 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Main {
+    private static final String version = "0.0.1";
+
     public static void main(String[] args) {
+        printBanner();
+
+        if (args.length == 0) {
+            printUsage();
+            return;
+        }
+
         final Gal gal = new Gal();
         int ticks = 10;
         String filePath = "";
@@ -80,5 +89,26 @@ public class Main {
             long bit = (initialValue >> i) & 1;
             gal.setPin(i + 1, bit == 1);
         }
+    }
+
+    private static void printBanner() {
+        System.out.println(" ######      ###    ##       ##       #### ##     ## ##     ##");
+        System.out.println("##    ##    ## ##   ##       ##        ##  ##     ## ###   ###");
+        System.out.println("##         ##   ##  ##       ##        ##  ##     ## #### ####");
+        System.out.println("##   #### ##     ## ##       ##        ##  ##     ## ## ### ##");
+        System.out.println("##    ##  ######### ##       ##        ##  ##     ## ##     ##");
+        System.out.println("##    ##  ##     ## ##       ##        ##  ##     ## ##     ##");
+        System.out.println(" ######   ##     ## ######## ######## ####  #######  ##     ##");
+        System.out.println("v." + version);
+        System.out.println();
+    }
+
+    private static void printUsage() {
+        System.out.println("Usage: java -jar <path to jar> [options]");
+        System.out.println("Options:");
+        System.out.println("  --ticks, -t <value>   Set the number of ticks to simulate");
+        System.out.println("  --file, -f <name>     Set the filename");
+        System.out.println("  --initial, -i <value>     Set the initial state of the pins (formats: binary [0b], hex: "
+                + "[0x], decimal [<none>]" + ")");
     }
 }
