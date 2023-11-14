@@ -5,7 +5,8 @@ import java.io.FileReader;
 import java.util.ArrayList;
 
 public class Main {
-    private static final String version = "0.0.1";
+    private static final String version = "0.0.2";
+    public static boolean isRawOutput = false;
 
     public static void main(String[] args) {
         printBanner();
@@ -46,6 +47,8 @@ public class Main {
                 } else {
                     System.err.println("Missing value for initial argument.");
                 }
+            } else if (arg.equals("--raw") || arg.equals("-r")) {
+                isRawOutput = true;
             }
         }
 
@@ -53,7 +56,9 @@ public class Main {
 
         for (int i = 0; i < ticks; i++) {
             gal.pulse();
-            System.out.println("tick: " + i);
+            if (!isRawOutput) {
+                System.out.println("tick: " + i);
+            }
             System.out.println(gal);
         }
     }
@@ -92,23 +97,24 @@ public class Main {
     }
 
     private static void printBanner() {
-        System.out.println(" ######      ###    ##       ##       #### ##     ## ##     ##");
-        System.out.println("##    ##    ## ##   ##       ##        ##  ##     ## ###   ###");
-        System.out.println("##         ##   ##  ##       ##        ##  ##     ## #### ####");
-        System.out.println("##   #### ##     ## ##       ##        ##  ##     ## ## ### ##");
-        System.out.println("##    ##  ######### ##       ##        ##  ##     ## ##     ##");
-        System.out.println("##    ##  ##     ## ##       ##        ##  ##     ## ##     ##");
-        System.out.println(" ######   ##     ## ######## ######## ####  #######  ##     ##");
-        System.out.println("v." + version);
-        System.out.println();
+        System.err.println(" ######      ###    ##       ##       #### ##     ## ##     ##");
+        System.err.println("##    ##    ## ##   ##       ##        ##  ##     ## ###   ###");
+        System.err.println("##         ##   ##  ##       ##        ##  ##     ## #### ####");
+        System.err.println("##   #### ##     ## ##       ##        ##  ##     ## ## ### ##");
+        System.err.println("##    ##  ######### ##       ##        ##  ##     ## ##     ##");
+        System.err.println("##    ##  ##     ## ##       ##        ##  ##     ## ##     ##");
+        System.err.println(" ######   ##     ## ######## ######## ####  #######  ##     ##");
+        System.err.println("v." + version);
+        System.err.println();
     }
 
     private static void printUsage() {
-        System.out.println("Usage: java -jar <path to jar> [options]");
-        System.out.println("Options:");
-        System.out.println("  --ticks, -t <value>   Set the number of ticks to simulate");
-        System.out.println("  --file, -f <name>     Set the filename");
-        System.out.println("  --initial, -i <value>     Set the initial state of the pins (formats: binary [0b], hex: "
+        System.err.println("Usage: java -jar <path to jar> [options]");
+        System.err.println("Options:");
+        System.err.println("  --ticks, -t <value>   Set the number of ticks to simulate");
+        System.err.println("  --file, -f <name>     Set the filename");
+        System.err.println("  --raw, -r           Output raw bit values");
+        System.err.println("  --initial, -i <value>     Set the initial state of the pins (formats: binary [0b], hex: "
                 + "[0x], decimal [<none>]" + ")");
     }
 }

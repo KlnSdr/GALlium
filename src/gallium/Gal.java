@@ -97,6 +97,22 @@ public class Gal {
 
     @Override
     public String toString() {
+        if (Main.isRawOutput) {
+            return rawOutput();
+        } else {
+            return prettyOutput();
+        }
+    }
+
+    private String rawOutput() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < 20; i++) {
+            sb.append(pins[i].getValue() ? "1" : "0");
+        }
+        return sb.toString();
+    }
+
+    private String prettyOutput() {
         final StringBuilder sb = new StringBuilder();
         for (int i = 0; i < 10; i++) {
             sb.append((i + 1)).append("\t").append(pins[i]).append(" --- ").append(pins[19 - i]).append("\t").append(20 - i).append("\n");
