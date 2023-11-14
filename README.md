@@ -13,5 +13,5 @@ Ein simples Programm, dass die einfachste Verwendung eines ?Gal16v8? simuliert.
       - `0x` => hexadezimal
       - *nichts* => dezimal
 ### Hinweise
-- **Gleichungsformen**: Aktuell werden DNF erwartet, für alles Weitere wird nicht richtig interpretiert werden.
+- **Gleichungsformen**: Aktuell werden DNF erwartet, alles Weitere wird nicht richtig interpretiert werden.
 - **Errorhandling**: Das Program stürzt bei Fehlern stilecht ab.
