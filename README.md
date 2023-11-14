@@ -1,9 +1,9 @@
 # GALlium
 Ein simples Programm, dass die einfachste Verwendung eines ?Gal16v8? simuliert.
 
-### Andwendung
+### Verwendung
 - Programmcode in eine Datei schreiben (nur den Teil die Pins betreffend, keine Konfiguration)
-- Programm ausführen
+- Programm ausführen `java -jar gallium.jar [options]`
   - mit `-t` spezifizieren wie viele Zeitintervalle "simuliert" werden sollen
   - mit `-f` pfad zur datei mit dem Programmcode übergeben
   - mit `-r` werden nur die Bitwerte der Pins als Binärzahl ausgegeben. (Pin 20 = lsb)
